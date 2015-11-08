@@ -27,6 +27,10 @@ module OmniAuth
           options[:client_secret]).gsub("\n", '')
       end
 
+      def query_string
+        '' # The state and code params shouldn't be sent as part of the callback_url in the callback phase
+      end
+
       uid do
         raw_info['user']['encodedId']
       end
