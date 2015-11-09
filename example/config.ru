@@ -22,7 +22,8 @@ use Rack::Session::Cookie
 
 use OmniAuth::Builder do
   provider :fitbit_oauth2, ENV['FITBIT_CLIENT_ID'], ENV['FITBIT_CLIENT_SECRET'],
-    :scope => 'profile activity sleep'
+    :scope => 'profile activity sleep', :expires_in => '2592000',
+    :prompt => 'login'
 end
 
 run App.new
