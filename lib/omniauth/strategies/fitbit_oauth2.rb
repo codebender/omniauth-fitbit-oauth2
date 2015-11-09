@@ -28,7 +28,9 @@ module OmniAuth
       end
 
       def query_string
-        '' # The state and code params shouldn't be sent as part of the callback_url in the callback phase
+        # The state and code params shouldn't be sent as part of the
+        # callback_url in the callback phase
+        ''
       end
 
       uid do
@@ -61,12 +63,12 @@ module OmniAuth
 
       def raw_info
         if options[:use_english_measure] == 'true'
-          @raw_info ||= MultiJson.load(access_token.
+          @raw_info ||= access_token.
             request('get', 'https://api.fitbit.com/1/user/-/profile.json',
-              { 'Accept-Language' => 'en_US' }).body)
+              { 'Accept-Language' => 'en_US' }).parsed
         else
-          @raw_info ||= MultiJson.load(access_token.
-            get('https://api.fitbit.com/1/user/-/profile.json').body)
+          @raw_info ||= access_token.
+            get('https://api.fitbit.com/1/user/-/profile.json').parsed
         end
       end
     end
